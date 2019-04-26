@@ -1,31 +1,31 @@
 ## 思科WLC与AP MAC绑定
-![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-1/IPsec%20VPN.png)
-我写这篇经验分享，主要不是说明这个具体的技术，更多的是遇到问题的一种处理过程；问题一定会有，关键是遇到问题的处理方法。我的做事原则是，遇到问题自己先努力去解决，实在没有办法了，再寻求帮助。
-最近在一个客户那进行技术支持，涉及到思科无线控制器WLC相关问题，思科WLC需要与思科AP进行MAC绑定。对于做过的人来说，这个问题很简单，没做的话就得花点时间去研究了。
-这个问题如果用华三AC去实现就很简单了，华三的AC就是通过AP的MAC地址或者序列号去识别AP的。由于思科WLC接触的比较少，而且页面都是英文，所以处理起来有些头疼的。遇到一些不会的问题很正常，就看你怎么去解决了。
-首先，熟悉WLC的页面，根据各个选项及复选框字面意思去理解。花了半个小时去熟悉WLC，生产环境，不敢瞎搞。百度或者谷歌吧，搜索一些关于这个相关的问题，资料不多，反馈的大多也是WLC如何去实现客户端MAC地址的绑定，没有WLC与AP绑定的相关问题。看了一些资料，介绍AP与WLC注册过程，这个注册过程默认是不需要进行验证的。最后登陆思科官网，思科官网资料又多又乱还都是英文，随随便便一个技术文档就几百页，根本不知从何下手啊。折腾了一上午也没有解决，还好客户不是很着急。最后只能联系思科400客服了。问题反馈给思科客服，等待反馈，下午思科客服给了我反馈，然后附上思科英文资料，我把英文资料熟读了2遍，很简单的一个问题，按照文档，下班实施变更，将问题解决，客户很满意。
-一个客户对一个工程师是否认可，从很多方面都能体现出来，首先是你的态度，一个认真负责的态度，这个态度要比你的专业技能更可贵。其次，你的专业技能，本职技能，有什么好说的呢。最后，要有一颗再学习的心，IT这行可谓“干到老，学到老”。
-如下为思科官网的具体操作过程，文档很详细，我就不录视频了。
-具体链接如下：
-https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html
+  我写这篇经验分享，主要不是说明这个具体的技术，更多的是遇到问题的一种处理过程；问题一定会有，关键是遇到问题的处理方法。我的做事原则是，遇到问题自己先努力去解决，实在没有办法了，再寻求帮助.  
+  最近在一个客户那进行技术支持，涉及到思科无线控制器WLC相关问题，思科WLC需要与思科AP进行MAC绑定。对于做过的人来说，这个问题很简单，没做的话就得花点时间去研究了。  
+  这个问题如果用华三AC去实现就很简单了，华三的AC就是通过AP的MAC地址或者序列号去识别AP的。由于思科WLC接触的比较少，而且页面都是英文，所以处理起来有些头疼的。遇到一些不会的问题很正常，就看你怎么去解决了。  
+  首先，熟悉WLC的页面，根据各个选项及复选框字面意思去理解。花了半个小时去熟悉WLC，生产环境，不敢瞎搞。百度或者谷歌吧，搜索一些关于这个相关的问题，资料不多，反馈的大多也是WLC如何去实现客户端MAC地址的绑定，没有WLC与AP绑定的相关问题。看了一些资料，介绍AP与WLC注册过程，这个注册过程默认是不需要进行验证的。最后登陆思科官网，思科官网资料又多又乱还都是英文，随随便便一个技术文档就几百页，根本不知从何下手啊。折腾了一上午也没有解决，还好客户不是很着急。最后只能联系思科400客服了。问题反馈给思科客服，等待反馈，下午思科客服给了我反馈，
+然后附上思科英文资料，我把英文资料熟读了2遍，很简单的一个问题，按照文档，下班实施变更，将问题解决，客户很满意。  
+  一个客户对一个工程师是否认可，从很多方面都能体现出来，首先是你的态度，一个认真负责的态度，这个态度要比你的专业技能更可贵。其次，你的专业技能，本职技能，有什么好说的呢。最后，要有一颗再学习的心，IT这行可谓“干到老，学到老”。  
+  如下为思科官网的具体操作过程，文档很详细，我就不录视频了。  
+  具体链接如下：  
+  https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html
 
 ##Contents
-[Introduction](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)(https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)(https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc0)
-[Prerequisites](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc1)
-[Requirements](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc2)
-[Components Used](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc3)
-[Conventions](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc4)
-[Lightweight Access Point (AP) Authorization](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc5)
-[Configure](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc6)
-[Configuration using the Internal Authorization List on the WLC](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc7)
-[Verify](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc8)
-[AP Authorization Against an AAA Server](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc9)
-[Configure the Cisco ISE to Authorize APs](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc10)
-[Configure the WLC as an AAA Client on the Cisco ISE](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc11)
-[Add the AP MAC Address to the User Database on the Cisco ISE](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc12)
-[Define a Policy Set](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc13)
+[Introduction](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc0)  
+[Prerequisites](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc1)  
+[Requirements](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc2)  
+[Components Used](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc3)  
+[Conventions](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc4)  
+[Lightweight Access Point (AP) Authorization](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc5)  
+[Configure](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc6)  
+[Configuration using the Internal Authorization List on the WLC](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc7)  
+[Verify](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc8)  
+[AP Authorization Against an AAA Server](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc9)  
+[Configure the Cisco ISE to Authorize APs](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc10)  
+[Configure the WLC as an AAA Client on the Cisco ISE](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc11)  
+[Add the AP MAC Address to the User Database on the Cisco ISE](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc12)  
+[Define a Policy Set](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc13)  
 [Verify](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)  
-[Troubleshoot](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc15)
+[Troubleshoot](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc15)  
 ##Introduction
 Security is always a concern nowadays and making sure that only legitimate Access Points (APs) connect to your Wireless LAN Controllers (WLCs) can be needed.
 This document explains how to configure WLC to authorize the APs based on the MAC address of the APs.
@@ -279,6 +279,7 @@ Define a Policy Set
 2.    Click Save.
 3.    Then create a new Allowed Protocols Service for the AP authenticaton. Make sure you select only "Allow PAP/ASCII": 
 ![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-10.jpeg)   
+
 4.     Select the previously created Service in the Allowed Protocols/Server Sequence. Expand the View and under Authentication Policy > Use > Internal Users so that ISE searched the internal DB for the username/password of the AP. 
 ![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-11.jpeg)
 ![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-12.jpeg) 
