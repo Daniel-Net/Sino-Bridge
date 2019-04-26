@@ -9,7 +9,7 @@
   具体链接如下：  
   https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html
 
-##Contents
+ Contents  
 [Introduction](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc0)  
 [Prerequisites](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc1)  
 [Requirements](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc2)  
@@ -26,169 +26,169 @@
 [Define a Policy Set](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc13)  
 [Verify](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)  
 [Troubleshoot](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc15)  
-##Introduction
-Security is always a concern nowadays and making sure that only legitimate Access Points (APs) connect to your Wireless LAN Controllers (WLCs) can be needed.
-This document explains how to configure WLC to authorize the APs based on the MAC address of the APs.
-##Prerequisites
-##Requirements
-Ensure that you meet these requirements before you attempt this configuration:
-•    Basic knowledge of how to configure a Cisco Identity Services Engine (ISE).
-•    Knowledge of the configuration of Cisco APs and Cisco WLCs.
-•    Knowledge of Cisco Unified Wireless Security Solutions.
-##Components Used
-The information in this document is based on these software and hardware versions:
+Introduction  
+Security is always a concern nowadays and making sure that only legitimate Access Points (APs) connect to your Wireless LAN Controllers (WLCs) can be needed.  
+This document explains how to configure WLC to authorize the APs based on the MAC address of the APs.  
+Prerequisites  
+Requirements  
+Ensure that you meet these requirements before you attempt this configuration:  
+•    Basic knowledge of how to configure a Cisco Identity Services Engine (ISE).  
+•    Knowledge of the configuration of Cisco APs and Cisco WLCs.  
+•    Knowledge of Cisco Unified Wireless Security Solutions.  
+Components Used    
+The information in this document is based on these software and hardware versions:  
 •    
-•    WLCs running AireOS 8.8.111.0 Software.
-•    Wave1 APs: 1700/2700/3700 and 3500 (1600/2600/3600 are still supported but AireOS support ends on version 8.5.x).
-•    Wave2 APs: 1800/2800/3800/4800, 1540 and 1560. 
-•    ISE version 2.3.0.298.
-The information in this document was created from the devices in a specific lab environment. All of the devices used in this document started with a cleared (default) configuration. If your network is live, make sure that you understand the potential impact of any command.
-##Conventions
-Refer to [Cisco Technical Tips Conventions](https://www.cisco.com/en/US/tech/tk801/tk36/technologies_tech_note09186a0080121ac5.shtml) for more information on document conventions.
-##Lightweight Access Point (AP) Authorization
-During the AP registration process, the APs and WLCs mutually authenticate using X.509 certificates.
-The X.509 certificates are burned into protected flash on both the access point (AP) and WLC at the factory by Cisco.
-On the AP, factory installed certificates are called manufacturing installed certificates (MIC). All Cisco APs manufactured after July 18, 2005 have MICs.
-In addition to this mutual authentication that occurs during the registration process, the WLCs can also restrict the APs that register with them based on the MAC address of the AP.
-The lack of a strong password by the use of the AP's MAC address should not be an issue because the controller uses MIC to authenticate the AP before authorizing the AP through the RADIUS server. The use of MIC provides strong authentication.
-AP authorization can be performed in two ways:
-•    Using the Internal Authorization list on the WLC.
-•    Using the MAC address database on an AAA server.
-The behaviors of the APs differ based on the certificate used:
-•    APs with SSCs—The WLC will only use the Internal Authorization list and will not forward a request to a RADIUS server for these APs.
-•    APs with MICs—WLC can use either the Internal Authorization list configured on the WLC or use a RADIUS server to authorize the APs.
-This document discusses AP authorization using both the Internal Authorization list and the AAA server.
-##Configure
-##Configuration using the Internal Authorization List on the WLC
-On the WLC, use the AP authorization list to restrict APs based on their MAC address. The AP authorization list is available under Security > AP Policies in the WLC GUI.
-This example shows how to add the AP with MAC address 4c:77:6d:9e:61:62.
-1.    From the WLC controller GUI, click Security > AP Policies.and the AP Policies page appears.
-2.    Click the Add button on the right hand side of the screen.
+•    WLCs running AireOS 8.8.111.0 Software.  
+•    Wave1 APs: 1700/2700/3700 and 3500 (1600/2600/3600 are still supported but AireOS support ends on version 8.5.x).  
+•    Wave2 APs: 1800/2800/3800/4800, 1540 and 1560.   
+•    ISE version 2.3.0.298.  
+The information in this document was created from the devices in a specific lab environment. All of the devices used in this document started with a cleared (default) configuration. If your network is live, make sure that you understand the potential impact of any command.  
+Conventions    
+Refer to [Cisco Technical Tips Conventions](https://www.cisco.com/en/US/tech/tk801/tk36/technologies_tech_note09186a0080121ac5.shtml) for more information on document conventions.  
+##Lightweight Access Point (AP) Authorization    
+During the AP registration process, the APs and WLCs mutually authenticate using X.509 certificates.    
+The X.509 certificates are burned into protected flash on both the access point (AP) and WLC at the factory by Cisco.    
+On the AP, factory installed certificates are called manufacturing installed certificates (MIC). All Cisco APs manufactured after July 18, 2005 have MICs.  
+In addition to this mutual authentication that occurs during the registration process, the WLCs can also restrict the APs that register with them based on the MAC address of the AP.  
+The lack of a strong password by the use of the AP's MAC address should not be an issue because the controller uses MIC to authenticate the AP before authorizing the AP through the RADIUS server. The use of MIC provides strong authentication.  
+AP authorization can be performed in two ways:  
+•    Using the Internal Authorization list on the WLC.  
+•    Using the MAC address database on an AAA server.  
+The behaviors of the APs differ based on the certificate used:  
+•    APs with SSCs—The WLC will only use the Internal Authorization list and will not forward a request to a RADIUS server for these APs.  
+•    APs with MICs—WLC can use either the Internal Authorization list configured on the WLC or use a RADIUS server to authorize the APs.  
+This document discusses AP authorization using both the Internal Authorization list and the AAA server.  
+##Configure  
+##Configuration using the Internal Authorization List on the WLC  
+On the WLC, use the AP authorization list to restrict APs based on their MAC address. The AP authorization list is available under Security > AP Policies in the WLC GUI.  
+This example shows how to add the AP with MAC address 4c:77:6d:9e:61:62.  
+1.    From the WLC controller GUI, click Security > AP Policies.and the AP Policies page appears.  
+2.    Click the Add button on the right hand side of the screen.  
 
-![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-00.jpeg)
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-00.jpeg)  
  
-3.    Under Add AP to Authorization List, enter the AP MAC address (NOT the AP Radio mac address). Then, choose the certificate type and click Add.
-In this example, a AP with MIC certificate is added.
-Note: For APs with SSCs, choose SSC under Certificate Type.
+3.    Under Add AP to Authorization List, enter the AP MAC address (NOT the AP Radio mac address). Then, choose the certificate type and click Add.  
+In this example, a AP with MIC certificate is added.  
+Note: For APs with SSCs, choose SSC under Certificate Type.  
 
-![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-01.jpeg)
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-01.jpeg)  
  
-The AP is added to the AP authorization list and is listed under AP Authorization List.
-4.    Under Policy Configuration, check the box for Authorize MIC APs against auth-list or AAA.
-When this parameter is selected, the WLC checks the local authorization list first. If the AP's MAC is not present, it checks the RADIUS server.
+The AP is added to the AP authorization list and is listed under AP Authorization List.  
+4.    Under Policy Configuration, check the box for Authorize MIC APs against auth-list or AAA.  
+When this parameter is selected, the WLC checks the local authorization list first. If the AP's MAC is not present, it checks the RADIUS server.  
  
-![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-02.jpeg)
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-02.jpeg)  
  
-##Verify
-In order to verify this configuration, you need to connect the AP with MAC address 4c:77:6d:9e:61:62 to the network and monitor. Use the debug capwap events/errors enable and debug aaa all enable commands to perform this.
-This output shows the debugs when the AP MAC address is not present in the AP authorization list:
-Note: Some of the lines in the output have been moved to the second line due to space constraints.
-##(Cisco Controller) >debug capwap events enable
-##(Cisco Controller) >debug capwap errors enable
-##(Cisco Controller) >debug aaa all enable
+Verify  
+In order to verify this configuration, you need to connect the AP with MAC address 4c:77:6d:9e:61:62 to the network and monitor. Use the debug capwap events/errors enable and debug aaa all enable commands to perform this.  
+This output shows the debugs when the AP MAC address is not present in the AP authorization list:  
+Note: Some of the lines in the output have been moved to the second line due to space constraints.  
+##(Cisco Controller) >debug capwap events enable  
+##(Cisco Controller) >debug capwap errors enable  
+##(Cisco Controller) >debug aaa all enable  
 
-*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Join Request from 192.168.79.151:5256
+*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Join Request from 192.168.79.151:5256  
 
-*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Unable to get Ap mode in Join request
+*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Unable to get Ap mode in Join request  
 
-*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Allocate database entry for AP 192.168.79.151:5256, already allocated index 277
+*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Allocate database entry for AP 192.168.79.151:5256, already allocated index 277  
 
-*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 AP Allocate request at index 277 (reserved)
-*spamApTask4: Feb 27 10:15:25.593: 24:7e:12:19:41:ef Deleting AP entry 192.168.79.151:5256 from temporary database.
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 AP group received default-group is found in ap group configured in wlc.
+*spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 AP Allocate request at index 277 (reserved)  
+*spamApTask4: Feb 27 10:15:25.593: 24:7e:12:19:41:ef Deleting AP entry 192.168.79.151:5256 from temporary database.  
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 AP group received default-group is found in ap group configured in wlc.  
 
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Dropping request or response packet to AP :192.168.79.151 (5256) by Controller: 10.48.71.20 (5246), message Capwap_wtp_event_response, state Capwap_no_state
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Dropping request or response packet to AP :192.168.79.151 (5256) by Controller: 10.48.71.20 (5246), message Capwap_wtp_event_response, state Capwap_no_state  
 
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 In AAA state 'Idle' for AP 70:69:5a:51:4e:c0
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join Request failed!
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 In AAA state 'Idle' for AP 70:69:5a:51:4e:c0  
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join Request failed!  
 
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 State machine handler: Failed to process msg type = 3 state = 0 from 192.168.79.151:5256
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 State machine handler: Failed to process msg type = 3 state = 0 from 192.168.79.151:5256  
 
-*aaaQueueReader: Feb 27 10:15:25.593: Unable to find requested user entry for 4c776d9e6162
-*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Normal Response code for AAA Authentication : -9
-*aaaQueueReader: Feb 27 10:15:25.593: ReProcessAuthentication previous proto 8, next proto 40000001
-*aaaQueueReader: Feb 27 10:15:25.593: AuthenticationRequest: 0x7f01b4083638
+*aaaQueueReader: Feb 27 10:15:25.593: Unable to find requested user entry for 4c776d9e6162  
+*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Normal Response code for AAA Authentication : -9  
+*aaaQueueReader: Feb 27 10:15:25.593: ReProcessAuthentication previous proto 8, next proto 40000001  
+*aaaQueueReader: Feb 27 10:15:25.593: AuthenticationRequest: 0x7f01b4083638  
 
-*aaaQueueReader: Feb 27 10:15:25.593: Callback.....................................0xd6cef02166
+*aaaQueueReader: Feb 27 10:15:25.593: Callback.....................................0xd6cef02166  
 
-*aaaQueueReader: Feb 27 10:15:25.593: protocolType.................................0x40000001
+*aaaQueueReader: Feb 27 10:15:25.593: protocolType.................................0x40000001  
 
-*aaaQueueReader: Feb 27 10:15:25.593: proxyState...................................70:69:5A:51:4E:C0-00:00
+*aaaQueueReader: Feb 27 10:15:25.593: proxyState...................................70:69:5A:51:4E:C0-00:00  
 
-*aaaQueueReader: Feb 27 10:15:25.593: Packet contains 9 AVPs:
+*aaaQueueReader: Feb 27 10:15:25.593: Packet contains 9 AVPs:  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[01] User-Name................................4c776d9e6162 (12 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[01] User-Name................................4c776d9e6162 (12 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[02] Called-Station-Id........................70-69-5a-51-4e-c0 (17 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[02] Called-Station-Id........................70-69-5a-51-4e-c0 (17 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[03] Calling-Station-Id.......................4c-77-6d-9e-61-62 (17 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[03] Calling-Station-Id.......................4c-77-6d-9e-61-62 (17 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[04] Nas-Port.................................0x00000001 (1) (4 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[04] Nas-Port.................................0x00000001 (1) (4 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[05] Nas-Ip-Address...........................0x0a304714 (170936084) (4 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[05] Nas-Ip-Address...........................0x0a304714 (170936084) (4 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[06] NAS-Identifier...........................0x6e6f (28271) (2 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[06] NAS-Identifier...........................0x6e6f (28271) (2 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[07] User-Password............................[...]
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[07] User-Password............................[...]  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[08] Service-Type.............................0x0000000a (10) (4 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[08] Service-Type.............................0x0000000a (10) (4 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: AVP[09] Message-Authenticator....................DATA (16 bytes)
+*aaaQueueReader: Feb 27 10:15:25.593: AVP[09] Message-Authenticator....................DATA (16 bytes)  
 
-*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Error Response code for AAA Authentication : -7
-*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Returning AAA Error 'No Server' (-7) for mobile 70:69:5a:51:4e:c0 serverIdx 0
-*aaaQueueReader: Feb 27 10:15:25.593: AuthorizationResponse: 0x7f017adf5770
+*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Error Response code for AAA Authentication : -7  
+*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Returning AAA Error 'No Server' (-7) for mobile 70:69:5a:51:4e:c0 serverIdx 0  
+*aaaQueueReader: Feb 27 10:15:25.593: AuthorizationResponse: 0x7f017adf5770  
 
 
-*aaaQueueReader: Feb 27 10:15:25.593: RadiusIndexSet(0), Index(0)
-*aaaQueueReader: Feb 27 10:15:25.593: resultCode...................................-7
+*aaaQueueReader: Feb 27 10:15:25.593: RadiusIndexSet(0), Index(0)  
+*aaaQueueReader: Feb 27 10:15:25.593: resultCode...................................-7  
 
-*aaaQueueReader: Feb 27 10:15:25.593: protocolUsed.................................0xffffffff
+*aaaQueueReader: Feb 27 10:15:25.593: protocolUsed.................................0xffffffff  
 
-*aaaQueueReader: Feb 27 10:15:25.593: proxyState...................................70:69:5A:51:4E:C0-00:00
+*aaaQueueReader: Feb 27 10:15:25.593: proxyState...................................70:69:5A:51:4E:C0-00:00  
 
-*aaaQueueReader: Feb 27 10:15:25.593: Packet contains 0 AVPs:
+*aaaQueueReader: Feb 27 10:15:25.593: Packet contains 0 AVPs:  
 
-*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 User entry not found in the Local FileDB for the client.
+*aaaQueueReader: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 User entry not found in the Local FileDB for the client.  
 
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join Version: = 134770432
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join Version: = 134770432  
 
-*spamApTask0: Feb 27 10:15:25.593: 00:00:00:00:00:00 apType = 54 apModel: AIR-AP4800-E-K
+*spamApTask0: Feb 27 10:15:25.593: 00:00:00:00:00:00 apType = 54 apModel: AIR-AP4800-E-K  
 
-*spamApTask0: Feb 27 10:15:25.593: 00:00:00:00:00:00 apType: Ox36 bundleApImageVer: 8.8.111.0
-*spamApTask0: Feb 27 10:15:25.593: 00:00:00:00:00:00 version:8 release:8 maint:111 build:0
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join resp: CAPWAP Maximum Msg element len = 79
+*spamApTask0: Feb 27 10:15:25.593: 00:00:00:00:00:00 apType: Ox36 bundleApImageVer: 8.8.111.0  
+*spamApTask0: Feb 27 10:15:25.593: 00:00:00:00:00:00 version:8 release:8 maint:111 build:0  
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join resp: CAPWAP Maximum Msg element len = 79  
 
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join Failure Response sent to 0.0.0.0:5256
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Join Failure Response sent to 0.0.0.0:5256  
 
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Radius Authentication failed. Closing dtls Connection.
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Disconnecting DTLS Capwap-Ctrl session 0xd6f0724fd8 for AP (192:168:79:151/5256). Notify(true)
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 CAPWAP State: Dtls tear down
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Radius Authentication failed. Closing dtls Connection.  
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Disconnecting DTLS Capwap-Ctrl session 0xd6f0724fd8 for AP (192:168:79:151/5256). Notify(true)  
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 CAPWAP State: Dtls tear down  
 
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 acDtlsPlumbControlPlaneKeys: lrad:192.168.79.151(5256) mwar:10.48.71.20(5246)
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 acDtlsPlumbControlPlaneKeys: lrad:192.168.79.151(5256) mwar:10.48.71.20(5246)  
 
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 DTLS keys for Control Plane deleted successfully for AP 192.168.79.151
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 DTLS keys for Control Plane deleted successfully for AP 192.168.79.151  
 
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 DTLS connection closed event receivedserver (10.48.71.20/5246) client (192.168.79.151/5256)
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Entry exists for AP (192.168.79.151/5256)
-*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 AP Delete request 
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 AP Delete request 
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Unable to find AP 70:69:5a:51:4e:c0
-*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 No AP entry exist in temporary database for 192.168.79.151:5256
-This output show the debugs when the LAP's MAC address is added to the AP authorization list:
-Note: Some of the lines in the output have been moved to the second line due to space constraints.
-(Cisco Controller) >debug capwap events enable
-(Cisco Controller) >debug capwap errors enable
-(Cisco Controller) >debug aaa all enable
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 DTLS connection closed event receivedserver (10.48.71.20/5246) client (192.168.79.151/5256)  
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Entry exists for AP (192.168.79.151/5256)  
+*spamApTask0: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 AP Delete request   
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 AP Delete request   
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 Unable to find AP 70:69:5a:51:4e:c0  
+*spamApTask4: Feb 27 10:15:25.593: 70:69:5a:51:4e:c0 No AP entry exist in temporary database for 192.168.79.151:5256  
+This output show the debugs when the LAP's MAC address is added to the AP authorization list:  
+Note: Some of the lines in the output have been moved to the second line due to space constraints.  
+(Cisco Controller) >debug capwap events enable  
+(Cisco Controller) >debug capwap errors enable  
+(Cisco Controller) >debug aaa all enable  
 
-*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 Join Request from 192.168.79.151:5256
+*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 Join Request from 192.168.79.151:5256  
 
-*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 using already alloced index 274
-*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 Unable to get Ap mode in Join request
+*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 using already alloced index 274  
+*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 Unable to get Ap mode in Join request  
 
-*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 Allocate database entry for AP 192.168.79.151:5256, already allocated index 274
+*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 Allocate database entry for AP 192.168.79.151:5256, already allocated index 274  
 
-*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 AP Allocate request at index 274 (reserved)
+*spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 AP Allocate request at index 274 (reserved)  
 *spamApTask4: Feb 27 09:50:25.393: 24:7e:12:19:41:ef Deleting AP entry 192.168.79.151:5256 from temporary database.
 *spamApTask4: Feb 27 09:50:25.393: 70:69:5a:51:4e:c0 AP group received default-group is found in ap group configured in wlc.
 
