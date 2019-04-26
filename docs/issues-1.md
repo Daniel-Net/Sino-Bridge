@@ -1,5 +1,5 @@
-##华为IPsec VPN一端穿越NAT配置
-[![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/IPsec%20VPN.png)]
+## 华为IPsec VPN一端穿越NAT配置
+![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/IPsec%20VPN.png)
 AR1配置:
 ipsec proposal 10
 ike peer 10 v1
@@ -40,3 +40,4 @@ interface GigabitEthernet0/0/0
 
 1.	NAT设备上需要把AR4的互联端口也进行nat转换，在AR1看来是1.1.1.1/30和2.2.2.1/30是互为对端，在AR4看来，是10.0.0.2/24和1.1.1.1/30互为对端，并且AR1上需要使用策略模版进行配置，野蛮模式，开启nat穿越，AR1上不需要定义感兴趣流量。IKE v2版本也可以，配置中没有野蛮模式。
 2.	也可以使用另一种方法实现，两个出口路由器可以配置VPN，在定义出口nat转换时，把两端互通的地址即感兴趣流量在nat转换列表里剔除，也就是感兴趣流量在经过路由器时，不进行nat转换。
+
