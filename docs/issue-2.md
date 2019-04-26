@@ -9,33 +9,33 @@
 具体链接如下：
 https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html
 
-Contents
-Introduction
-Prerequisites
-Requirements
-Components Used
-Conventions
-Lightweight Access Point (AP) Authorization
-Configure
-Configuration using the Internal Authorization List on the WLC
-Verify
-AP Authorization Against an AAA Server
-Configure the Cisco ISE to Authorize APs
-Configure the WLC as an AAA Client on the Cisco ISE
-Add the AP MAC Address to the User Database on the Cisco ISE
-Define a Policy Set
-Verify
-Troubleshoot
-Introduction
+##Contents
+[Introduction](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)(https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)(https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc0)
+[Prerequisites](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc1)
+[Requirements](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc2)
+[Components Used](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc3)
+[Conventions](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc4)
+[Lightweight Access Point (AP) Authorization](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc5)
+[Configure](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc6)
+[Configuration using the Internal Authorization List on the WLC](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc7)
+[Verify](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc8)
+[AP Authorization Against an AAA Server](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc9)
+[Configure the Cisco ISE to Authorize APs](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc10)
+[Configure the WLC as an AAA Client on the Cisco ISE](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc11)
+[Add the AP MAC Address to the User Database on the Cisco ISE](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc12)
+[Define a Policy Set](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc13)
+[Verify](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc14)  
+[Troubleshoot](https://www.cisco.com/c/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config.html#anc15)
+##Introduction
 Security is always a concern nowadays and making sure that only legitimate Access Points (APs) connect to your Wireless LAN Controllers (WLCs) can be needed.
 This document explains how to configure WLC to authorize the APs based on the MAC address of the APs.
-Prerequisites
-Requirements
+##Prerequisites
+##Requirements
 Ensure that you meet these requirements before you attempt this configuration:
 •    Basic knowledge of how to configure a Cisco Identity Services Engine (ISE).
 •    Knowledge of the configuration of Cisco APs and Cisco WLCs.
 •    Knowledge of Cisco Unified Wireless Security Solutions.
-Components Used
+##Components Used
 The information in this document is based on these software and hardware versions:
 •    
 •    WLCs running AireOS 8.8.111.0 Software.
@@ -43,9 +43,9 @@ The information in this document is based on these software and hardware version
 •    Wave2 APs: 1800/2800/3800/4800, 1540 and 1560. 
 •    ISE version 2.3.0.298.
 The information in this document was created from the devices in a specific lab environment. All of the devices used in this document started with a cleared (default) configuration. If your network is live, make sure that you understand the potential impact of any command.
-Conventions
-Refer to Cisco Technical Tips Conventions for more information on document conventions.
-Lightweight Access Point (AP) Authorization
+##Conventions
+Refer to [Cisco Technical Tips Conventions](https://www.cisco.com/en/US/tech/tk801/tk36/technologies_tech_note09186a0080121ac5.shtml) for more information on document conventions.
+##Lightweight Access Point (AP) Authorization
 During the AP registration process, the APs and WLCs mutually authenticate using X.509 certificates.
 The X.509 certificates are burned into protected flash on both the access point (AP) and WLC at the factory by Cisco.
 On the AP, factory installed certificates are called manufacturing installed certificates (MIC). All Cisco APs manufactured after July 18, 2005 have MICs.
@@ -58,28 +58,34 @@ The behaviors of the APs differ based on the certificate used:
 •    APs with SSCs—The WLC will only use the Internal Authorization list and will not forward a request to a RADIUS server for these APs.
 •    APs with MICs—WLC can use either the Internal Authorization list configured on the WLC or use a RADIUS server to authorize the APs.
 This document discusses AP authorization using both the Internal Authorization list and the AAA server.
-Configure
-Configuration using the Internal Authorization List on the WLC
+##Configure
+##Configuration using the Internal Authorization List on the WLC
 On the WLC, use the AP authorization list to restrict APs based on their MAC address. The AP authorization list is available under Security > AP Policies in the WLC GUI.
 This example shows how to add the AP with MAC address 4c:77:6d:9e:61:62.
 1.    From the WLC controller GUI, click Security > AP Policies.and the AP Policies page appears.
 2.    Click the Add button on the right hand side of the screen.
+
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-00.jpeg)
  
 3.    Under Add AP to Authorization List, enter the AP MAC address (NOT the AP Radio mac address). Then, choose the certificate type and click Add.
 In this example, a AP with MIC certificate is added.
 Note: For APs with SSCs, choose SSC under Certificate Type.
+
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-01.jpeg)
  
 The AP is added to the AP authorization list and is listed under AP Authorization List.
 4.    Under Policy Configuration, check the box for Authorize MIC APs against auth-list or AAA.
 When this parameter is selected, the WLC checks the local authorization list first. If the AP's MAC is not present, it checks the RADIUS server.
  
-Verify
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-02.jpeg)
+ 
+##Verify
 In order to verify this configuration, you need to connect the AP with MAC address 4c:77:6d:9e:61:62 to the network and monitor. Use the debug capwap events/errors enable and debug aaa all enable commands to perform this.
 This output shows the debugs when the AP MAC address is not present in the AP authorization list:
 Note: Some of the lines in the output have been moved to the second line due to space constraints.
-(Cisco Controller) >debug capwap events enable
-(Cisco Controller) >debug capwap errors enable
-(Cisco Controller) >debug aaa all enable
+##(Cisco Controller) >debug capwap events enable
+##(Cisco Controller) >debug capwap errors enable
+##(Cisco Controller) >debug aaa all enable
 
 *spamApTask4: Feb 27 10:15:25.592: 70:69:5a:51:4e:c0 Join Request from 192.168.79.151:5256
 
@@ -229,40 +235,53 @@ Note: Some of the lines in the output have been moved to the second line due to 
 *spamApTask0: Feb 27 09:50:25.394: 70:69:5a:51:4e:c0 Capwap State Change Event (Reg) from capwap_ac_platform.c 2136
 
 *apfReceiveTask: Feb 27 09:50:25.394: 70:69:5a:51:4e:c0 Register LWAPP event for AP 70:69:5a:51:4e:c0 slot 0
-AP Authorization Against an AAA Server
+##AP Authorization Against an AAA Server
 You can also configure WLCs to use RADIUS servers to authorize APs using MICs. The WLC uses a AP's MAC address as both the username and password when sending the information to a RADIUS server. For example, if the MAC address of the AP is 4c:77:6d:9e:61:62, both the username and password used by the controller to authorize the AP will be that mac address using the defined delimeter.
 This example shows how to configure the WLCs to authorize APs using the Cisco ISE.
 1.    From the WLC controller GUI, click Security > AP Policies. The AP Policies page appears.  
 2.    Under Policy Configuration, check the box for Authorize MIC APs against auth-list or AAA.
 When this parameter is selected, the WLC checks the local authorization list first. If the AP's MAC is not present, it checks the RADIUS server.
+
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-03.jpeg)
  
 3.    Go to Security > RADIUS Authentication from the controller GUI to display the RADIUS Authentication Servers page. In this page we can define the MAC Delimiter. The WLC will get the AP Mac address and send it to the Radius Server using the delimiter defnied here. this is important so that the username matches what is configured in the Radius server. In this example we will use No Delimeter so that the username will be 4c776d9e6162. 
+
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-04.jpeg)
+
 4.    Then, click New in order to define a RADIUS server.
+
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-05.jpeg)
  
 5.    Define the RADIUS server parameters on the RADIUS Authentication Servers > New page. These parameters include the RADIUS Server IP Address, Shared Secret, Port Number, and Server Status. When done, click Apply. This example uses the Cisco ISE as the RADIUS server with IP address 10.48.39.128.
-Configure the Cisco ISE to Authorize APs
+##Configure the Cisco ISE to Authorize APs
 In order to enable the Cisco ISE to authorize APs, you need to complete these steps:
 1.    Configure the WLC as an AAA Client on the Cisco ISE.
 2.    Add the AP MAC Addresses to the User Database on the Cisco ISE.
 Configure the WLC as an AAA Client on the Cisco ISE
 1.    Go to Administration > Network Resources > Network Devices > Add. The New Network Device page appears.  
 2.    On this page, define the WLC Name, Management Interface IP Address and Radius Authentications Settings like Shared Secret.
- 
+
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-06.jpeg) 
  
 3.    Click Submit.
 Add the AP MAC Address to the User Database on the Cisco ISE
 1.    Go to Administration > Identity Management. Here we need to make sure the password policy allows the usage of the username as password and the policy must also allow the usage of the mac address characters whitout the need for different types of characters. Go to Settings > User Authentication Settings > Password Policy: 
  
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-07.jpeg)
   
 2.    Then go to Identities > Users and click Add. When the User Setup page appears, define the username and password for this AP as shown. Tip: use the Description field to enter the password to later be easy to know what was defined as password.
 The password should also be the AP's MAC address. In this example, it is 4c776d9e6162.
- 
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-08.jpeg) 
 3.    Click Submit. 
 Define a Policy Set
-1.    We need to define a Policy Set to match the authentication request coming from the WLC. First we build a Condition going to Policy > Policy Elements > Conditions, and creating a new condition to match the WLC location, in this example, "LAB_WLC" and Radius:Service-Type Equals Call Check which is used for Mac authentication. Here the condition is named "AP_Auth".     
+1.    We need to define a Policy Set to match the authentication request coming from the WLC. First we build a Condition going to Policy > Policy Elements > Conditions, and creating a new condition to match the WLC location, in this example, "LAB_WLC" and Radius:Service-Type Equals Call Check which is used for Mac authentication. Here the condition is named "AP_Auth".   
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-09.jpeg)  
 2.    Click Save.
-3.    Then create a new Allowed Protocols Service for the AP authenticaton. Make sure you select only "Allow PAP/ASCII":    
-4.     Select the previously created Service in the Allowed Protocols/Server Sequence. Expand the View and under Authentication Policy > Use > Internal Users so that ISE searched the internal DB for the username/password of the AP.  
+3.    Then create a new Allowed Protocols Service for the AP authenticaton. Make sure you select only "Allow PAP/ASCII": 
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-10.jpeg)   
+4.     Select the previously created Service in the Allowed Protocols/Server Sequence. Expand the View and under Authentication Policy > Use > Internal Users so that ISE searched the internal DB for the username/password of the AP. 
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-11.jpeg)
+![](https://www.cisco.com/c/dam/en/us/support/docs/wireless/4400-series-wireless-lan-controllers/98848-lap-auth-uwn-config-12.jpeg) 
 5.    Click Save.
 Verify
 In order to verify this configuration, you need to connect the AP with MAC address 4c:77:6d:9e:61:62 to the network and monitor. Use the debug capwap events/errors enable and debug aaa all enable commands in order to perform this.
