@@ -18,8 +18,8 @@ add an AP-count license
   
 选择 MANAGEMENT > Software Activation > Licenses  
   
-To add an AP-count license for Cisco controllers follow these steps:   
-  
+To add an AP-count license for Cisco controllers follow these steps:  
+
 1.进入conut在license conunt 选项栏中。  
 2.在下拉菜单中选择Add   
 3.点击设置Count.   
