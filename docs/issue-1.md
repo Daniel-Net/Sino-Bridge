@@ -1,5 +1,5 @@
 ## 华为IPsec VPN一端穿越NAT配置
-![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issues-1/IPsec%20VPN.png)
+![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-1/IPsec%20VPN.png)
 AR1配置:  
 ipsec proposal 10  
 ike peer 10 v1  
