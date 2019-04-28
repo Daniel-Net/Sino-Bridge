@@ -21,8 +21,8 @@ README
         * [华三IRF的BFD  MAD检测](docs/issue-5.md)
         * ~~联通城域网核心思科CRS1链路捆绑故障分析~~
         * [思科7206网路由器替换遇到的问题](docs/issue-7.md)
-        * [bind搭建DNS服务器](docs/issue-8.md) :high_brightness:
-        * ~~N7K交换机- Module7报警问题的原因说明~~
+        * [bind搭建DNS服务器](docs/issue-8.md) 
+        * [N7K交换机- Module7报警问题的原因说明](docs/issue-9.md) :high_brightness:
         * ~~生成树拓扑变化解析与故障案例分析~~
         * ~~思科6506交换机升级笔记~~
         * ~~思科ASA防火墙内存告警处理过程~~
