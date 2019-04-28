@@ -1,23 +1,23 @@
-一．	dhcp-snooping的作用以及抵御哪些攻击？说明攻击原理和抵御方式？  
-dhcp-snooping的定义：   
+## 一．dhcp-snooping的作用以及抵御哪些攻击？说明攻击原理和抵御方式？  
+### dhcp-snooping的定义：   
 DHCP Snooping是一种DHCP安全特性，可以过滤不信任的DHCP消息并建立和维护一个DHCP Snooping绑定表。该绑定表包括MAC地址、IP地址、租约时间、绑定类型、VLAN ID、接口信息。DHCP Snooping的作用就如同在DHCP Client和DHCP Server之间建立一道防火墙。  
   
-dhcp交互过程  
-发现阶段  
+### dhcp交互过程  
+#### 发现阶段  
 即DHCP客户端寻找DHCP服务器的阶段。客户端通过UDP知名端口68以广播方式发送DHCPDISCOVER报文，只有DHCP服务器才会进行响应。  
-提供阶段  
+#### 提供阶段  
 即DHCP服务器提供IP地址的阶段。DHCP服务器接收到客户端的DHCPDISCOVER报文后，从IP地址池中挑选一个尚未分配的IP地址准备分配给客户端，通过UDP知名端口67向该客户端发送包含待分配的IP地址、租期和其他配置信息（如网关地址、DNS服务器地址等）的DHCPOFFER报文。  
-选择阶段  
+#### 选择阶段  
 即DHCP客户端选择IP地址的阶段。如果有多台DHCP服务器向该客户端发来DHCPOFFER报文，客户端只接受第一个收到的DHCPOFFER报文，然后以广播方式向各DHCP服务器回应DHCPREQUEST报文，该DHCPREQUEST报文中包含向所选定的DHCP服务器请求IP地址的内容。  
-确认阶段  
+#### 确认阶段  
 即DHCP服务器确认所提供IP地址的阶段。当DHCP服务器收到DHCP客户端回答的DHCPREQUEST报文后：如果是客户端选定的服务器，则该服务器根据DHCPREQUEST报文中携带的MAC地址来查找有没有相应的租约记录。若果没有找到相应的租约记录，则向客户端发送一个nak报文，告知没有可分配的ip地址。  
 dhcp decline 当客户端发现服务器给它的ip地址发生冲突时会通过发送此报文来通知服务器，并且重新向服务器申请地址  
 dhcp release 客户端主动释放服务器分配的ip地址，当服务器收到后，可将这个ip地址分配给其他客户端  
 dhcp inform  客户端获取地址后，如果需要向服务器获取更详细的配置信息 如网关dns等，就发送此报文。  
   
-介绍DHCP Snooping的实现原理，常见的dhcp攻击有哪些？  
+## 介绍DHCP Snooping的实现原理，常见的dhcp攻击有哪些？  
   
-1.DHCP Server仿冒者攻击  
+### 1.DHCP Server仿冒者攻击  
 由于DHCP请求报文以广播形式发送，所以DHCP Server仿冒者可以侦听到此报文。DHCP Server仿冒者回应给DHCP Client仿冒信息，如错误的网关地址、错误的DNS服务器、错误的IP等，达到DoS（Deny of Service）的目的。如图1所示。  
 图1 DHCP Server仿冒者攻击示意图   
    
@@ -25,12 +25,12 @@ dhcp inform  客户端获取地址后，如果需要向服务器获取更详细�
 把某个物理接口或者VLAN的接口设置为“信任（Trusted）”或者“不信任（Untrusted）”。凡是从“不信任（Untrusted）”接口上收到的DHCP Reply（Offer、ACK、NAK）报文直接丢弃，这样可以隔离DHCP Server仿冒者攻击。如图2所示。  
   
   
-2.中间人攻击  
+### 2.中间人攻击  
 首先，中间人向客户端发送带有自己的MAC地址和服务器IP地址的报文，让客户端学到中间人的IP和MAC，达到仿冒DHCP Server的目的。达到目的后，客户端发到DHCP服务器的报文都会经过中间人；然后，中间人向服务器发送带有自己MAC和客户端IP的报文，让服务器学到中间人的IP和MAC，达到仿冒客户端的目的，如图3所示。  
 中间人完成服务器和客户端的数据交换。在服务器看来，所有的报文都是来自或者发往客户端；在客户端看来，所有的报文也都是来自或者发往服务器端。但实际上这些报文都是经过了中间人的“二手”信息。  
 图3 中间人攻击示意图   
    
-3.IP/MAC Spoofing攻击  
+### 3.IP/MAC Spoofing攻击  
 攻击者向服务器发送带有合法用户IP和MAC的报文，令服务器误以为已经学到这个合法用户的IP和MAC，但真正的合法用户不能从服务器获得服务。如图4所示。  
 图4 IP/MAC Spoofing攻击示意图   
    
@@ -51,7 +51,7 @@ DHCP Snooping绑定表中的动态表项是根据DHCP server回的ACK报文自�
 图5 应用IP与MAC绑定表示意图   
    
   
-4.改变CHADDR值的DoS攻击  
+### 4.改变CHADDR值的DoS攻击  
 如果攻击者改变的不是数据帧头部的源MAC，而是改变DHCP报文中的CHADDR（Client Hardware Address）值来不断申请IP地址，如图6所示，而设备仅根据数据帧头部的源MAC来判断该报文是否合法，那么“MAC地址限制”方案不能起作用。  
 图6 改变CHADDR的DOS攻击   
    
