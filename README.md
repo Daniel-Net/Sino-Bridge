@@ -1,14 +1,16 @@
 README
 ======
+[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
+[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
+[![HitCount](http://hits.dwyl.io/Daniel-Net/Sino-bridge.svg)](http://hits.dwyl.io/Daniel-Net/Sino-bridge)  
+======
 该文档为Sino-Bridge团队,每周经验分享汇总，现文档仅更新一部分，待目录中内容陆续更新，目录内容全部更新后，文档将每周五更新。
 ***
 
 |Author|Sino-Bridge Team|
 |---|---
 
-[![996.icu](https://img.shields.io/badge/link-996.icu-red.svg)](https://996.icu)
-[![LICENSE](https://img.shields.io/badge/license-Anti%20996-blue.svg)](https://github.com/996icu/996.ICU/blob/master/LICENSE)
-[![HitCount](http://hits.dwyl.io/Daniel-Net/Sino-bridge.svg)](http://hits.dwyl.io/Daniel-Net/Sino-bridge)
+
 ***
 
 ## 目录
