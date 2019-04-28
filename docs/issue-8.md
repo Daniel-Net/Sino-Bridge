@@ -75,7 +75,7 @@
 　　　　cp -r /usr/share/doc/bind-9.9.4/sample/var/* /var/named/chroot/var/  
 　　3、配置BIND服务的主配置文件（/var/named/chroot/etc/named.conf），命令：vim /var/named/chroot/etc/named.conf；  
 　　　　内容很多使用简单配置，删除文件中logging以下的全部内容，以及option中的部分内容，得到如下配置  
-   
+```   
 /*  
  Sample named.conf BIND DNS server 'named' configuration file  
  for the Red Hat BIND distribution.  
@@ -94,6 +94,7 @@ options
         // listen-on-v6 port 53  { any; };  
         listen-on-v6 port 53    { ::1; };  
 }; 
+```
    
  　4、在主配置文件（/var/named/chroot/etc/named.conf ）中加入，zone参数  
   ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-8/8-8.png)     
