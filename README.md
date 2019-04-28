@@ -13,8 +13,8 @@ README
     * 4月 
         * [华为IPsec VPN 一端穿越NAT配置](docs/issue-1.md)
         * [思科WLC与AP MAC绑定](docs/issue-2.md)
-        * [思科WLC重启后linceses需重新导入](docs/issue-3.md) :high_brightness:
-        * ~~常见的dhcp snooping攻击和防御介绍~~
+        * [思科WLC重启后linceses需重新导入](docs/issue-3.md)
+        * [常见的dhcp snooping攻击和防御介绍](docs/issue-4.md) :high_brightness:
         * ~~华三IRF的BFD  MAD检测~~
         * ~~联通城域网核心思科CRS1链路捆绑故障分析~~
         * ~~思科7206网路由器替换遇到的问题~~
