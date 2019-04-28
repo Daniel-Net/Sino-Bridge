@@ -13,7 +13,7 @@ Install License
 4.如果EULA对话框出现，点击Accept.  
 5.重启控制器。 进入COMMANDS > Reboot 选择 Save and Reboot / Reboot without Save  
 
-====
+----
 
 add an AP-count license  
   
@@ -26,7 +26,8 @@ To add an AP-count license for Cisco controllers follow these steps:
 3.点击设置Count.   
 4.当出现(EULA) 时, 点击 Accept. 
 
-====
+----
+
 切换设备lincense  
   
 1.选择 MANAGEMENT > Software Activation > Licenses   
