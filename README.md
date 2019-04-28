@@ -18,9 +18,9 @@ README
         * [思科WLC与AP MAC绑定](docs/issue-2.md)
         * [思科WLC重启后linceses需重新导入](docs/issue-3.md)
         * [常见的dhcp snooping攻击和防御介绍](docs/issue-4.md)
-        * [华三IRF的BFD  MAD检测](docs/issue-5.md) :high_brightness:
+        * [华三IRF的BFD  MAD检测](docs/issue-5.md)
         * ~~联通城域网核心思科CRS1链路捆绑故障分析~~
-        * ~~思科7206网路由器替换遇到的问题~~
+        * [思科7206网路由器替换遇到的问题](docs/issue-7.md) :high_brightness:
         * ~~bind搭建DNS服务器~~
         * ~~N7K交换机- Module7报警问题的原因说明~~
         * ~~生成树拓扑变化解析与故障案例分析~~
