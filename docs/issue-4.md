@@ -1,4 +1,4 @@
-## 一．dhcp-snooping的作用以及抵御哪些攻击？说明攻击原理和抵御方式？  
+## dhcp-snooping的作用以及抵御哪些攻击？说明攻击原理和抵御方式？  
 ### dhcp-snooping的定义：   
 DHCP Snooping是一种DHCP安全特性，可以过滤不信任的DHCP消息并建立和维护一个DHCP Snooping绑定表。该绑定表包括MAC地址、IP地址、租约时间、绑定类型、VLAN ID、接口信息。DHCP Snooping的作用就如同在DHCP Client和DHCP Server之间建立一道防火墙。  
   
@@ -20,19 +20,26 @@ dhcp inform  客户端获取地址后，如果需要向服务器获取更详细�
 ### 1.DHCP Server仿冒者攻击  
 由于DHCP请求报文以广播形式发送，所以DHCP Server仿冒者可以侦听到此报文。DHCP Server仿冒者回应给DHCP Client仿冒信息，如错误的网关地址、错误的DNS服务器、错误的IP等，达到DoS（Deny of Service）的目的。如图1所示。  
 图1 DHCP Server仿冒者攻击示意图   
-   
+
+  ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-4/4-1.png)
+
 为防止DHCP Server仿冒者攻击，可使用DHCP Snooping的“信任（Trusted）/不信任（Untrusted）”工作模式。  
 把某个物理接口或者VLAN的接口设置为“信任（Trusted）”或者“不信任（Untrusted）”。凡是从“不信任（Untrusted）”接口上收到的DHCP Reply（Offer、ACK、NAK）报文直接丢弃，这样可以隔离DHCP Server仿冒者攻击。如图2所示。  
-  
+
+  ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-4/4-2.png)
   
 ### 2.中间人攻击  
 首先，中间人向客户端发送带有自己的MAC地址和服务器IP地址的报文，让客户端学到中间人的IP和MAC，达到仿冒DHCP Server的目的。达到目的后，客户端发到DHCP服务器的报文都会经过中间人；然后，中间人向服务器发送带有自己MAC和客户端IP的报文，让服务器学到中间人的IP和MAC，达到仿冒客户端的目的，如图3所示。  
 中间人完成服务器和客户端的数据交换。在服务器看来，所有的报文都是来自或者发往客户端；在客户端看来，所有的报文也都是来自或者发往服务器端。但实际上这些报文都是经过了中间人的“二手”信息。  
 图3 中间人攻击示意图   
+
+  ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-4/4-3.png)
    
 ### 3.IP/MAC Spoofing攻击  
 攻击者向服务器发送带有合法用户IP和MAC的报文，令服务器误以为已经学到这个合法用户的IP和MAC，但真正的合法用户不能从服务器获得服务。如图4所示。  
 图4 IP/MAC Spoofing攻击示意图   
+
+   ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-4/4-4.png)
    
 为隔离中间人攻击与IP/MAC Spoofing攻击，可使用DHCP Snooping绑定表工作模式。  
 当接口接收到ARP或者IP报文，使用ARP或者IP报文中的“源IP+源MAC”匹配DHCP Snooping绑定表。如果匹配就进行转发，如果不匹配就丢弃。如图5所示。  
@@ -49,7 +56,8 @@ DHCP Snooping绑定表中的动态表项是根据DHCP server回的ACK报文自�
 对于配置静态IP的用户，由于没有通过DHCP请求而获得IP，所以，没有对应的DHCP Snooping绑定表项，该用户发出的ARP、IP报文会被丢弃，从而防止该用户非法使用网络。只能通过配置静态DHCP Snooping绑定表来允许静态IP用户访问网络。  
 对于盗用其他合法用户IP地址的用户，由于同样不是自己通过DHCP请求而获得IP的，IP对应的DHCP Snooping绑定表项中的MAC以及接口与盗用者的不一致，盗用者发出的ARP、IP报文会被丢弃，从而防止该盗用者非法使用网络。  
 图5 应用IP与MAC绑定表示意图   
-   
+
+   ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-4/4-5.png)
   
 ### 4.改变CHADDR值的DoS攻击  
 如果攻击者改变的不是数据帧头部的源MAC，而是改变DHCP报文中的CHADDR（Client Hardware Address）值来不断申请IP地址，如图6所示，而设备仅根据数据帧头部的源MAC来判断该报文是否合法，那么“MAC地址限制”方案不能起作用。  
