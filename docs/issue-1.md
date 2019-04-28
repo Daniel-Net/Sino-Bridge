@@ -1,6 +1,6 @@
 ## 华为IPsec VPN一端穿越NAT配置
 ![](https://github.com/Daniel-Net/Sino-Bridge/blob/master/image/issue-1/IPsec%20VPN.png)
-AR1配置:  
+### AR1配置:  
 ipsec proposal 10  
 ike peer 10 v1  
  exchange-mode aggressive  
@@ -14,14 +14,14 @@ interface GigabitEthernet0/0/0
  ip address 1.1.1.1 255.255.255.252   
  ipsec policy 1  
 
-AR3配置  
+### AR3配置  
 acl number 2000    
  rule 10 permit  
 interface GigabitEthernet0/0/1  
  ip address 2.2.2.1 255.255.255.252   
  nat outbound 2000  
 
-AR4配置  
+### AR4配置  
 acl number 3000    
  rule 5 permit ip source 172.16.1.0 0.0.0.255 destination 192.168.1.0 0.0.0.255   
 ipsec proposal 20  
